@@ -9,6 +9,7 @@ import {IJobSeeker} from "./jobSeeker";
 export interface IJobApplication {
     jobId: IJob | string, //job _id
     jobSeekerId: IJobSeeker | string, //job seeker _id
+    selected: boolean, //if the application is selected or not
 }
 
 const jobApplicationSchema = new Schema({
@@ -22,6 +23,10 @@ const jobApplicationSchema = new Schema({
         ref: "jobSeeker",
         required: true,
     },
+    selected: {
+        type: Boolean,
+        default: false,
+    }
 })
 
 //exporting the model

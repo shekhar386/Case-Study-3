@@ -326,6 +326,24 @@ export default class Server {
         );
 
         /**
+         * Find selected job applications
+         * only for organisation
+         */
+        this.app.get("/org/jobApplication/selected", expressResponse(async (req: Request) => {
+                //authenticating the organisation
+                //@ts-ignore
+                if(!(req.session && req.session.org)){
+                    throw new Error("Not Authenticated")
+                }
+                //variable to store current org's id
+                //@ts-ignore
+                const orgData = req.session.org._id;
+                // call and return controller
+                return CtrlJobApplication.findJobApplicationsSelect(orgData);
+            }),
+        );
+
+        /**
          * Find all job domain
          * for anyone
          */

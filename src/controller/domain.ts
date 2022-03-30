@@ -227,6 +227,11 @@ export default class CtrlDomain {
                                     foreignField: "jobId",
                                     as: "Application",
                                     pipeline: [
+                                        {
+                                            $match: {
+                                                selected: false,
+                                            }
+                                        },
                                         //nested lookup
                                         {
                                             //joining job seekers details of that application
@@ -284,6 +289,11 @@ export default class CtrlDomain {
                                     foreignField: "jobId",
                                     as: "Application",
                                     pipeline: [
+                                        {
+                                            $match: {
+                                                selected: false,
+                                            }
+                                        },
                                         //nested lookup
                                         {
                                             //get job seeker's details for that application
@@ -341,6 +351,11 @@ export default class CtrlDomain {
                                     foreignField: "jobId",
                                     as: "Application",
                                     pipeline: [
+                                        {
+                                            $match: {
+                                                selected: false,
+                                            }
+                                        },
                                         //nested lookup
                                         {
                                             //job seeker's details
@@ -406,6 +421,11 @@ export default class CtrlDomain {
                                 foreignField: "jobId",
                                 as: "Application",
                                 pipeline: [
+                                    {
+                                        $match: {
+                                            selected: false,
+                                        }
+                                    },
                                     //nested lookup
                                     {
                                         //get job seeker's details

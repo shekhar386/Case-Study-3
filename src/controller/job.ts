@@ -204,7 +204,7 @@ export default class CtrlJob {
                 {
                     //show only current org's jobs
                     $match: {
-                        orgId: new mongoose.Types.ObjectId(orgData)
+                        orgId: new mongoose.Types.ObjectId(orgData),
                     }
                 },
                 //paging and limit per page
@@ -228,6 +228,11 @@ export default class CtrlJob {
                         foreignField: "jobId",
                         as: "Application",
                         pipeline: [
+                            {
+                                $match: {
+                                    selected: false,
+                                }
+                            },
                             //job seeker's details
                             {
                                 $lookup: {
@@ -272,6 +277,11 @@ export default class CtrlJob {
                         foreignField: "jobId",
                         as: "Application",
                         pipeline: [
+                            {
+                                $match: {
+                                    selected: false,
+                                }
+                            },
                             //nested lookup
                             {
                                 //job seeker's details
@@ -317,6 +327,11 @@ export default class CtrlJob {
                         foreignField: "jobId",
                         as: "Application",
                         pipeline: [
+                            {
+                                $match: {
+                                    selected: false,
+                                }
+                            },
                             //getting job seeker's details
                             {
                                 $lookup: {
@@ -371,6 +386,11 @@ export default class CtrlJob {
                         foreignField: "jobId",
                         as: "Application",
                         pipeline: [
+                            {
+                                $match: {
+                                    selected: false,
+                                }
+                            },
                             //nested lookup
                             {
                                 //get job seeker's details
@@ -412,6 +432,11 @@ export default class CtrlJob {
                         foreignField: "jobId",
                         as: "Application",
                         pipeline: [
+                            {
+                                $match: {
+                                    selected: false,
+                                }
+                            },
                             //nested lookup
                             {
                                 //get job seeker's details
@@ -453,6 +478,11 @@ export default class CtrlJob {
                         foreignField: "jobId",
                         as: "Application",
                         pipeline: [
+                            {
+                                $match: {
+                                    selected: false,
+                                }
+                            },
                             //nested lookup
                             {
                                 //get job seeker's details
