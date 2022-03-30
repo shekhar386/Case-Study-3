@@ -53,7 +53,7 @@ export default class CtrlJobSeeker {
     }
 
     /**
-     * Return the job seeker's application
+     * Return the job seeker's application (profile)
      * @param jobSeekerData
      */
     static async findJobApplication(jobSeekerData: string): Promise<any> {

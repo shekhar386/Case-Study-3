@@ -213,7 +213,6 @@ export default class Server {
             //joi schema
             const schema = Joi.object({
                 name: Joi.string().required(), //job name
-                orgName: Joi.string().required(), //organisation's name
                 domainName: Joi.string().required(), //domain of job
                 skillReq: Joi.string().required(), //skill required for job
                 ctc: Joi.number().integer().required(), //salary of job

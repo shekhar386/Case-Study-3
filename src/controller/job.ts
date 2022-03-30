@@ -62,7 +62,7 @@ export default class CtrlJob {
                     $sort: {
                         ctc: order,
                     }
-                }
+                },
             ]).exec();
         }
         //sort by date
@@ -125,7 +125,7 @@ export default class CtrlJob {
      */
     static async findCert(page: number, limit: number, filterBy: string, filter: number ): Promise<IJob[]> {
         //variable to get date 7 days before current date
-        const recent = moment().subtract(7, "days").toISOString();
+        const recent = moment().subtract(7, "days").utcOffset(0, true).toISOString();
         //filter by recently added
         if(filterBy === "recent") {
             return job.aggregate([
@@ -238,7 +238,7 @@ export default class CtrlJob {
                                 }
                             }
                         ]
-                    }
+                    },
                 },
             ]).exec();
         }
@@ -344,7 +344,7 @@ export default class CtrlJob {
      */
     static async findCertOrg(page: number, limit: number, filterBy: string, filter: number, orgData: string ): Promise<IJob[]> {
         //variable to store date 7 days before current date
-        const recent = moment().subtract(7, "days").toISOString();
+        const recent = moment().subtract(7, "days").utcOffset(0, true).toISOString();
         //filter only recently added jobs
         if(filterBy === "recent") {
             return job.aggregate([

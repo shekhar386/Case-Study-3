@@ -8,7 +8,6 @@ import {IOrg} from "./organisation";
 export interface IJob {
     name: string, //job name
     orgId: IOrg | string, //organisation's _id
-    orgName: string,
     domainName: string, //domain name
     skillReq: string, //skills required
     dateAdded: string, //date job was added
@@ -24,10 +23,6 @@ const jobSchema = new Schema({
     orgId: {
         type: Schema.Types.ObjectId,
         ref: "org",
-        required: true,
-    },
-    orgName: {
-        type: String,
         required: true,
     },
     domainName: {
