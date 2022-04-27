@@ -366,11 +366,6 @@ export default class Server {
          * for anyone
          */
         this.app.get("/domain/all", expressResponse(async (req: Request) => {
-            //authenticating the organisation
-            //@ts-ignore
-            if(!(req.session && req.session.org)){
-                throw new Error("Not Authenticated")
-            }
                 // joi schema
                 const schema = Joi.object({
                     page: Joi.number().integer().default(0), //for paging
