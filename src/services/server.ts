@@ -344,6 +344,24 @@ export default class Server {
         );
 
         /**
+         * Find all job applications
+         * only for organisation
+         */
+        this.app.get("/org/jobApplication/all", expressResponse(async (req: Request) => {
+                //authenticating the organisation
+                //@ts-ignore
+                if(!(req.session && req.session.org)){
+                    throw new Error("Not Authenticated")
+                }
+                //variable to store current org's id
+                //@ts-ignore
+                const orgData = req.session.org._id;
+                // call and return controller
+                return CtrlJobApplication.findJobApplicationsAll(orgData);
+            }),
+        );
+
+        /**
          * Find all job domain
          * for anyone
          */
@@ -373,11 +391,6 @@ export default class Server {
          * for anyone
          */
         this.app.get("/domain/certain", expressResponse(async (req: Request) => {
-            //authenticating the organisation
-            //@ts-ignore
-            if(!(req.session && req.session.org)){
-                throw new Error("Not Authenticated")
-            }
                 // joi schema
                 const schema = Joi.object({
                     page: Joi.number().integer().default(0), //for paging
@@ -397,6 +410,11 @@ export default class Server {
          * only for organisation
          */
         this.app.get("/org/domain/all", expressResponse(async (req: Request) => {
+            //authenticating the organisation
+            //@ts-ignore
+            if(!(req.session && req.session.org)){
+                throw new Error("Not Authenticated")
+            }
                 // joi schema
                 const schema = Joi.object({
                     page: Joi.number().integer().default(0), //for paging
@@ -441,7 +459,7 @@ export default class Server {
          * con only be done by jobSeeker
          */
         this.app.post("/jobApplication/create", expressResponse(async (req: Request) => {
-            //authenticating the admin
+            //authenticating the jobSeeker
             //@ts-ignore
             if(!(req.session && req.session.jobSeeker)){
                 throw new Error("Not Authenticated")

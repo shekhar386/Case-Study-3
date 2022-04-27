@@ -121,4 +121,40 @@ export default class CtrlJobApplication {
             },
         ]).exec();
     }
+    /**
+     * Find all applications for jobs
+     * for organisation
+     * @param orgData
+     */
+    static async findJobApplicationsAll(orgData: string): Promise<IJob[]> {
+        return job.aggregate([
+            {
+                $match: {
+                    //show only current org's jobs
+                    orgId: new mongoose.Types.ObjectId(orgData),
+                },
+            },
+            //join jobapplications collection
+            {
+                $lookup: {
+                    from: "jobapplications",
+                    localField: "_id",
+                    foreignField: "jobId",
+                    as: "Application",
+                    pipeline: [
+                        //nested lookup
+                        {
+                            //get job seeker's details
+                            $lookup: {
+                                from: "jobseekers",
+                                localField: "jobSeekerId",
+                                foreignField: "_id",
+                                as: "Applicant",
+                            }
+                        }
+                    ]
+                }
+            },
+        ]).exec();
+    }
 }
