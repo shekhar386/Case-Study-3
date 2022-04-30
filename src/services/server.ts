@@ -59,7 +59,7 @@ export default class Server {
     }
 
     /**
-     * App routes for cinema
+     * App routes for job seeker
      */
     routes() {
 
